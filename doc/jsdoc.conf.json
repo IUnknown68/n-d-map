@@ -1,0 +1,9 @@
+{
+  "opts": {
+    "destination": "./doc/html/"
+  },
+  "plugins": ["plugins/markdown"],
+  "source": {
+    "include": ["NDMap.js"]
+  }
+}

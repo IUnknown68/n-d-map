@@ -1,0 +1,37 @@
+{
+  "name": "n-d-map",
+  "version": "0.1.0",
+  "description": "Multi-dimensional Map.",
+  "scripts": {
+    "compile": "node build.js",
+    "test": "./node_modules/.bin/mocha -c --compilers js:babel-core/register",
+    "doc": "./node_modules/.bin/jsdoc2md ./NDMap.js > ./doc/README.md",
+    "doc:html": "./node_modules/.bin/jsdoc -c ./doc/jsdoc.conf.json",
+    "build": "npm run test && npm run compile && npm run doc && npm run doc:html"
+  },
+  "main": "NDMap.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IUnknown68/n-d-map.git"
+  },
+  "keywords": [
+    "Map"
+  ],
+  "author": "Arne Seib",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IUnknown68/n-d-map/issues"
+  },
+  "homepage": "https://github.com/IUnknown68/n-d-map/blob/master/README.md",
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-preset-es2015": "^6.18.0",
+    "chai": "^3.5.0",
+    "jsdoc": "^3.4.3",
+    "jsdoc-to-markdown": "^2.0.1",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0",
+    "uglify-js": "^2.7.5"
+  }
+}
