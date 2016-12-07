@@ -1,179 +1,309 @@
-## Classes
+<a name="module_NDEMap"></a>
 
-<dl>
-<dt><a href="#NDMap">NDMap</a></dt>
-<dd><p>NDMap is a multi-dimensional map.</p>
-</dd>
-</dl>
+## NDEMap
+`NDEMap` is multidimensional Map that emulates multiple dimensions by
+joining / splitting keys by a given separator. It uses a flat `Map` to store
+it's values.
 
-## Functions
+The differences towards `NDMap` (true multidimensional Map) are:
+- Keys are stringified with a separator. This means, you can use only strings
+  for the keys, and you need to reserve a certain char (default: ':') as a
+  separator.
+- The order in which items are returned by `Iterator`s is strictly the order
+  in which items were inserted, regardless of the dimensions.
 
-<dl>
-<dt><a href="#assertDimension">assertDimension(map, key)</a> ⇒ <code>Map</code></dt>
-<dd><p>Makes sure a <code>Map</code> exists for <code>key</code> in <code>map</code>. Creates one if none found.</p>
-</dd>
-<dt><a href="#getSize">getSize(map, depth)</a> ⇒ <code>Number</code></dt>
-<dd><p>Returns the number of data-elements stored in <code>map</code> or its descendants.
-Recursive function. When called with a <code>depth</code> of 1, it returns the size of <code>map</code>.
-Otherwise it iterates the entries and calls <code>getSize()</code> on it with <code>depth</code> decremented
-by 1.</p>
-</dd>
-</dl>
+**Author:** Arne Seib <arne28@seiberspace.de>  
+**License**: MIT - see ./LICENSE  
+**Copyright**: Arne Seib 2016  
 
-<a name="NDMap"></a>
+* [NDEMap](#module_NDEMap)
+    * [~NDEMap](#module_NDEMap..NDEMap)
+        * [new NDEMap(dimensions, separator)](#new_module_NDEMap..NDEMap_new)
+        * [.size](#module_NDEMap..NDEMap+size) ⇒ <code>Number</code>
+        * [.clear()](#module_NDEMap..NDEMap+clear)
+        * [.delete(...keys)](#module_NDEMap..NDEMap+delete) ⇒ <code>Boolean</code>
+        * [.get(...keys)](#module_NDEMap..NDEMap+get) ⇒ <code>Object</code>
+        * [.has(...keys)](#module_NDEMap..NDEMap+has) ⇒ <code>Boolean</code>
+        * [.set(...args)](#module_NDEMap..NDEMap+set)
+        * [.entries()](#module_NDEMap..NDEMap+entries) ⇒ <code>Iterator</code>
+        * [.keys()](#module_NDEMap..NDEMap+keys) ⇒ <code>Iterator</code>
+        * [.values()](#module_NDEMap..NDEMap+values) ⇒ <code>Iterator</code>
+        * [.forEach()](#module_NDEMap..NDEMap+forEach)
 
-## NDMap
-NDMap is a multi-dimensional map.
+<a name="module_NDEMap..NDEMap"></a>
 
-**Kind**: global class  
+### NDEMap~NDEMap
+`NDEMap` is a multi-dimensional map.
 
-* [NDMap](#NDMap)
-    * [new NDMap(dimensions)](#new_NDMap_new)
-    * [.size](#NDMap+size) ⇒ <code>Number</code>
-    * [._getEntry(keys)](#NDMap+_getEntry) ⇒ <code>Object</code>
-    * [.clear()](#NDMap+clear)
-    * [.delete(...keys)](#NDMap+delete) ⇒ <code>Boolean</code>
-    * [.get(...keys)](#NDMap+get) ⇒ <code>Object</code>
-    * [.has(...keys)](#NDMap+has) ⇒ <code>Boolean</code>
-    * [.set(...args)](#NDMap+set)
-    * [.entries()](#NDMap+entries)
-    * [.keys()](#NDMap+keys)
-    * [.values()](#NDMap+values)
-    * [.forEach()](#NDMap+forEach)
+**Kind**: inner class of <code>[NDEMap](#module_NDEMap)</code>  
 
-<a name="new_NDMap_new"></a>
+* [~NDEMap](#module_NDEMap..NDEMap)
+    * [new NDEMap(dimensions, separator)](#new_module_NDEMap..NDEMap_new)
+    * [.size](#module_NDEMap..NDEMap+size) ⇒ <code>Number</code>
+    * [.clear()](#module_NDEMap..NDEMap+clear)
+    * [.delete(...keys)](#module_NDEMap..NDEMap+delete) ⇒ <code>Boolean</code>
+    * [.get(...keys)](#module_NDEMap..NDEMap+get) ⇒ <code>Object</code>
+    * [.has(...keys)](#module_NDEMap..NDEMap+has) ⇒ <code>Boolean</code>
+    * [.set(...args)](#module_NDEMap..NDEMap+set)
+    * [.entries()](#module_NDEMap..NDEMap+entries) ⇒ <code>Iterator</code>
+    * [.keys()](#module_NDEMap..NDEMap+keys) ⇒ <code>Iterator</code>
+    * [.values()](#module_NDEMap..NDEMap+values) ⇒ <code>Iterator</code>
+    * [.forEach()](#module_NDEMap..NDEMap+forEach)
 
-### new NDMap(dimensions)
-Constructor for NDMap.
+<a name="new_module_NDEMap..NDEMap_new"></a>
+
+#### new NDEMap(dimensions, separator)
+Constructor for NDEMap.
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| dimensions | <code>Number</code> | The number of dimensions for this instance. |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| dimensions | <code>Number</code> |  | The number of dimensions for this instance. |
+| separator | <code>String</code> | <code>:</code> | The separator to use. |
 
-<a name="NDMap+size"></a>
+<a name="module_NDEMap..NDEMap+size"></a>
 
-### ndMap.size ⇒ <code>Number</code>
+#### ndeMap.size ⇒ <code>Number</code>
 Getter for size. Returns the overall number of data-items stored. Use wiseley,
 this will iterate recursiveley through all descendants!
 
-**Kind**: instance property of <code>[NDMap](#NDMap)</code>  
+**Kind**: instance property of <code>[NDEMap](#module_NDEMap..NDEMap)</code>  
 **Returns**: <code>Number</code> - Total number of data-items stored.  
-<a name="NDMap+_getEntry"></a>
+<a name="module_NDEMap..NDEMap+clear"></a>
 
-### ndMap._getEntry(keys) ⇒ <code>Object</code>
-Returns the item at the path specified by `keys`.
-
-**Kind**: instance method of <code>[NDMap](#NDMap)</code>  
-**Returns**: <code>Object</code> - Whatever is stored here. Can be a `Map` or a value.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| keys | <code>Array</code> | Array with keys. Must be <= `this._dimensions`. |
-
-<a name="NDMap+clear"></a>
-
-### ndMap.clear()
+#### ndeMap.clear()
 Removes all items.
 
-**Kind**: instance method of <code>[NDMap](#NDMap)</code>  
-<a name="NDMap+delete"></a>
+**Kind**: instance method of <code>[NDEMap](#module_NDEMap..NDEMap)</code>  
+<a name="module_NDEMap..NDEMap+delete"></a>
 
-### ndMap.delete(...keys) ⇒ <code>Boolean</code>
+#### ndeMap.delete(...keys) ⇒ <code>Boolean</code>
 Removes the item specified by `keys`.
 
-**Kind**: instance method of <code>[NDMap](#NDMap)</code>  
+**Kind**: instance method of <code>[NDEMap](#module_NDEMap..NDEMap)</code>  
 **Returns**: <code>Boolean</code> - True if the item was found (and removed).  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | ...keys | <code>Any</code> | Full path (all dimensions) to the item to remove. |
 
-<a name="NDMap+get"></a>
+<a name="module_NDEMap..NDEMap+get"></a>
 
-### ndMap.get(...keys) ⇒ <code>Object</code>
+#### ndeMap.get(...keys) ⇒ <code>Object</code>
 Returns the item specified by `keys`.
 
-**Kind**: instance method of <code>[NDMap](#NDMap)</code>  
+**Kind**: instance method of <code>[NDEMap](#module_NDEMap..NDEMap)</code>  
 **Returns**: <code>Object</code> - Whatever is stored here. Can be a `Map` or a value.  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | ...keys | <code>Any</code> | Full or partial path to the item. |
 
-<a name="NDMap+has"></a>
+<a name="module_NDEMap..NDEMap+has"></a>
 
-### ndMap.has(...keys) ⇒ <code>Boolean</code>
+#### ndeMap.has(...keys) ⇒ <code>Boolean</code>
 Checks if the item specified by `keys` exists.
 
-**Kind**: instance method of <code>[NDMap](#NDMap)</code>  
+**Kind**: instance method of <code>[NDEMap](#module_NDEMap..NDEMap)</code>  
 **Returns**: <code>Boolean</code> - True if the item exists.  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | ...keys | <code>Any</code> | Full or partial path to the item. |
 
-<a name="NDMap+set"></a>
+<a name="module_NDEMap..NDEMap+set"></a>
 
-### ndMap.set(...args)
+#### ndeMap.set(...args)
 Sets a data-item.
 
-**Kind**: instance method of <code>[NDMap](#NDMap)</code>  
+**Kind**: instance method of <code>[NDEMap](#module_NDEMap..NDEMap)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | ...args | <code>Any</code> | The last entry must be the value to set.                    The rest is the full path to the item.                    If the path does not exist, it is created. |
 
-<a name="NDMap+entries"></a>
+<a name="module_NDEMap..NDEMap+entries"></a>
 
-### ndMap.entries()
-`this._root.entries(...)`
+#### ndeMap.entries() ⇒ <code>Iterator</code>
+Returns an iterator that iterates over all data-entries. The key-entry will
+be an array of keys the size of this instances dimensions.
 
-**Kind**: instance method of <code>[NDMap](#NDMap)</code>  
-<a name="NDMap+keys"></a>
+**Kind**: instance method of <code>[NDEMap](#module_NDEMap..NDEMap)</code>  
+**Returns**: <code>Iterator</code> - Iterator for entries.  
+<a name="module_NDEMap..NDEMap+keys"></a>
 
-### ndMap.keys()
-`this._root.keys(...)`
+#### ndeMap.keys() ⇒ <code>Iterator</code>
+Returns an iterator that iterates over all data-keys. Each key will
+be an array of keys the size of this instances dimensions.
 
-**Kind**: instance method of <code>[NDMap](#NDMap)</code>  
-<a name="NDMap+values"></a>
+**Kind**: instance method of <code>[NDEMap](#module_NDEMap..NDEMap)</code>  
+**Returns**: <code>Iterator</code> - Iterator for keys.  
+<a name="module_NDEMap..NDEMap+values"></a>
 
-### ndMap.values()
-`this._root.values(...)`
+#### ndeMap.values() ⇒ <code>Iterator</code>
+Returns an iterator that iterates over all data-values.
 
-**Kind**: instance method of <code>[NDMap](#NDMap)</code>  
-<a name="NDMap+forEach"></a>
+**Kind**: instance method of <code>[NDEMap](#module_NDEMap..NDEMap)</code>  
+**Returns**: <code>Iterator</code> - Iterator for values.  
+<a name="module_NDEMap..NDEMap+forEach"></a>
 
-### ndMap.forEach()
+#### ndeMap.forEach()
 `this._root.forEach(...)`
 
-**Kind**: instance method of <code>[NDMap](#NDMap)</code>  
-<a name="assertDimension"></a>
+**Kind**: instance method of <code>[NDEMap](#module_NDEMap..NDEMap)</code>  
+<a name="module_NDMap"></a>
 
-## assertDimension(map, key) ⇒ <code>Map</code>
-Makes sure a `Map` exists for `key` in `map`. Creates one if none found.
+## NDMap
+`NDMap` is a "true" multidimensional Map. True means, it is actually
+a Map of Maps of Maps etc. Means, it does not use a flat Map internally, and
+does not perform any keymapping, as `NDEMap` does.
+In many cases you will be happy with the emulation `NDEMap` gives, you. However,
+there are a couple of differences, and there might be cases where you prefer
+a true multidimensional Map.
 
-**Kind**: global function  
-**Returns**: <code>Map</code> - The `Map` for that key.  
+The differences are:
+- Keys are not stringified. You can use (just like in a normal `Map`) anything
+  you like. When you use strings, you don't have to worry about separators.
+  This means also, that the equality-rules of `Map` apply.
+- The order in which items are returned by `Iterator`s is **not** the order
+  items were inserted in. Per level the order is preserved, but over all not.
+  So whe the order matters you should use `NDEMap` instead.
+
+**Author:** Arne Seib <arne28@seiberspace.de>  
+**License**: MIT - see ./LICENSE  
+**Copyright**: Arne Seib 2016  
+
+* [NDMap](#module_NDMap)
+    * [~NDMap](#module_NDMap..NDMap)
+        * [new NDMap(dimensions)](#new_module_NDMap..NDMap_new)
+        * [.size](#module_NDMap..NDMap+size) ⇒ <code>Number</code>
+        * [.clear()](#module_NDMap..NDMap+clear)
+        * [.delete(...keys)](#module_NDMap..NDMap+delete) ⇒ <code>Boolean</code>
+        * [.get(...keys)](#module_NDMap..NDMap+get) ⇒ <code>Object</code>
+        * [.has(...keys)](#module_NDMap..NDMap+has) ⇒ <code>Boolean</code>
+        * [.set(...args)](#module_NDMap..NDMap+set)
+        * [.entries()](#module_NDMap..NDMap+entries) ⇒ <code>Iterator</code>
+        * [.keys()](#module_NDMap..NDMap+keys) ⇒ <code>Iterator</code>
+        * [.values()](#module_NDMap..NDMap+values) ⇒ <code>Iterator</code>
+        * [.forEach()](#module_NDMap..NDMap+forEach)
+
+<a name="module_NDMap..NDMap"></a>
+
+### NDMap~NDMap
+`NDMap` is a multi-dimensional map.
+
+**Kind**: inner class of <code>[NDMap](#module_NDMap)</code>  
+
+* [~NDMap](#module_NDMap..NDMap)
+    * [new NDMap(dimensions)](#new_module_NDMap..NDMap_new)
+    * [.size](#module_NDMap..NDMap+size) ⇒ <code>Number</code>
+    * [.clear()](#module_NDMap..NDMap+clear)
+    * [.delete(...keys)](#module_NDMap..NDMap+delete) ⇒ <code>Boolean</code>
+    * [.get(...keys)](#module_NDMap..NDMap+get) ⇒ <code>Object</code>
+    * [.has(...keys)](#module_NDMap..NDMap+has) ⇒ <code>Boolean</code>
+    * [.set(...args)](#module_NDMap..NDMap+set)
+    * [.entries()](#module_NDMap..NDMap+entries) ⇒ <code>Iterator</code>
+    * [.keys()](#module_NDMap..NDMap+keys) ⇒ <code>Iterator</code>
+    * [.values()](#module_NDMap..NDMap+values) ⇒ <code>Iterator</code>
+    * [.forEach()](#module_NDMap..NDMap+forEach)
+
+<a name="new_module_NDMap..NDMap_new"></a>
+
+#### new NDMap(dimensions)
+Constructor for `NDMap`.
+
 
 | Param | Type | Description |
 | --- | --- | --- |
-| map | <code>Map</code> | The map to check for `key`. |
-| key | <code>any</code> | The key to assert. |
+| dimensions | <code>Number</code> | The number of dimensions for this instance. |
 
-<a name="getSize"></a>
+<a name="module_NDMap..NDMap+size"></a>
 
-## getSize(map, depth) ⇒ <code>Number</code>
-Returns the number of data-elements stored in `map` or its descendants.
-Recursive function. When called with a `depth` of 1, it returns the size of `map`.
-Otherwise it iterates the entries and calls `getSize()` on it with `depth` decremented
-by 1.
+#### ndMap.size ⇒ <code>Number</code>
+Getter for size. Returns the overall number of data-items stored. Use wiseley,
+this will iterate recursiveley through all descendants!
 
-**Kind**: global function  
-**Returns**: <code>Number</code> - Total number of data-entries.  
+**Kind**: instance property of <code>[NDMap](#module_NDMap..NDMap)</code>  
+**Returns**: <code>Number</code> - Total number of data-items stored.  
+<a name="module_NDMap..NDMap+clear"></a>
+
+#### ndMap.clear()
+Removes all items.
+
+**Kind**: instance method of <code>[NDMap](#module_NDMap..NDMap)</code>  
+<a name="module_NDMap..NDMap+delete"></a>
+
+#### ndMap.delete(...keys) ⇒ <code>Boolean</code>
+Removes the item specified by `keys`.
+
+**Kind**: instance method of <code>[NDMap](#module_NDMap..NDMap)</code>  
+**Returns**: <code>Boolean</code> - True if the item was found (and removed).  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| map | <code>Map</code> | The map iterate. |
-| depth | <code>Number</code> | Maximal depth to iterate. When `map` is a root-map, then                        this is initially the number of dimensions. |
+| ...keys | <code>Any</code> | Full path (all dimensions) to the item to remove. |
 
+<a name="module_NDMap..NDMap+get"></a>
+
+#### ndMap.get(...keys) ⇒ <code>Object</code>
+Returns the item specified by `keys`.
+
+**Kind**: instance method of <code>[NDMap](#module_NDMap..NDMap)</code>  
+**Returns**: <code>Object</code> - Whatever is stored here. Can be a `Map` or a value.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...keys | <code>Any</code> | Full or partial path to the item. |
+
+<a name="module_NDMap..NDMap+has"></a>
+
+#### ndMap.has(...keys) ⇒ <code>Boolean</code>
+Checks if the item specified by `keys` exists.
+
+**Kind**: instance method of <code>[NDMap](#module_NDMap..NDMap)</code>  
+**Returns**: <code>Boolean</code> - True if the item exists.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...keys | <code>Any</code> | Full or partial path to the item. |
+
+<a name="module_NDMap..NDMap+set"></a>
+
+#### ndMap.set(...args)
+Sets a data-item.
+
+**Kind**: instance method of <code>[NDMap](#module_NDMap..NDMap)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...args | <code>Any</code> | The last entry must be the value to set.                    The rest is the full path to the item.                    If the path does not exist, it is created. |
+
+<a name="module_NDMap..NDMap+entries"></a>
+
+#### ndMap.entries() ⇒ <code>Iterator</code>
+Returns an iterator that iterates over all data-entries. The key-entry will
+be an array of keys the size of this instances dimensions.
+
+**Kind**: instance method of <code>[NDMap](#module_NDMap..NDMap)</code>  
+**Returns**: <code>Iterator</code> - Iterator for entries.  
+<a name="module_NDMap..NDMap+keys"></a>
+
+#### ndMap.keys() ⇒ <code>Iterator</code>
+Returns an iterator that iterates over all data-keys. Each key will
+be an array of keys the size of this instances dimensions.
+
+**Kind**: instance method of <code>[NDMap](#module_NDMap..NDMap)</code>  
+**Returns**: <code>Iterator</code> - Iterator for keys.  
+<a name="module_NDMap..NDMap+values"></a>
+
+#### ndMap.values() ⇒ <code>Iterator</code>
+Returns an iterator that iterates over all data-values.
+
+**Kind**: instance method of <code>[NDMap](#module_NDMap..NDMap)</code>  
+**Returns**: <code>Iterator</code> - Iterator for values.  
+<a name="module_NDMap..NDMap+forEach"></a>
+
+#### ndMap.forEach()
+`this._root.forEach(...)`
+
+**Kind**: instance method of <code>[NDMap](#module_NDMap..NDMap)</code>  

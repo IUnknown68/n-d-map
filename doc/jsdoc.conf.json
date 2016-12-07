@@ -1,9 +1,10 @@
 {
   "opts": {
-    "destination": "./doc/html/"
+    "destination": "./doc/html/",
+    "private": true
   },
   "plugins": ["plugins/markdown"],
   "source": {
-    "include": ["NDMap.js"]
+    "include": ["lib", "README.md"]
   }
 }

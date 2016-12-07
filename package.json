@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "description": "Multi-dimensional Map.",
   "scripts": {
-    "compile": "node build.js",
-    "test": "./node_modules/.bin/mocha -c --compilers js:babel-core/register",
-    "doc": "./node_modules/.bin/jsdoc2md ./NDMap.js > ./doc/README.md",
-    "doc:html": "./node_modules/.bin/jsdoc -c ./doc/jsdoc.conf.json",
-    "build": "npm run test && npm run compile && npm run doc && npm run doc:html"
+    "test": "mocha -c --compilers js:babel-core/register test/*.spec.js",
+    "doc": "jsdoc2md -f lib/*.js --module-index-format none > doc/README.md",
+    "doc:html": "jsdoc -c doc/jsdoc.conf.json",
+    "build": "npm run test && npm run doc && npm run doc:html"
   },
-  "main": "NDMap.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/IUnknown68/n-d-map.git"
