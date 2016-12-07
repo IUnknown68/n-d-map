@@ -39,6 +39,18 @@ differences:
   multiple key arguments in a `NDMap`. The function will check if all keys are present,
   and throw if this is not the case.
 
+```javascript
+const NDMap = require('n-d-map/lib/NDMap');
+// or
+const NDMap = require('n-d-map').NDMap;
+// or
+import {NDMap} from 'n-d-map';
+// etc
+// or equally for NDEMap
+
+const m = new NDMap(2);
+```
+
 ### Implementations
 
 There are two implementations available: `NDMap`, a true multidimensional map,
