@@ -228,40 +228,68 @@ export default (MapClass, name) => {
         addTestData(testee);
       });
 
-      it('keys() delivers all keys in the correct order', () => {
-        let n = 0;
-        for (let val of testee.keys()) {
-          expect(val).to.eql(testData[n][0]);
-          ++n;
-        }
-        expect(n).to.equal(testData.length);
+      describe('keys()', () => {
+        it('delivers all keys in the correct order', () => {
+          let n = 0;
+          for (let val of testee.keys()) {
+            expect(val).to.eql(testData[n][0]);
+            ++n;
+          }
+          expect(n).to.equal(testData.length);
+        });
+
+        it('is a well-formed iterable', () => {
+          const iter = testee.keys();
+          expect(iter[Symbol.iterator]()).to.eql(iter);
+        });
       });
 
-      it('values() delivers all values in the correct order', () => {
-        let n = 0;
-        for (let val of testee.values()) {
-          expect(val).to.eql(testData[n][1]);
-          ++n;
-        }
-        expect(n).to.equal(testData.length);
+      describe('values()', () => {
+        it('values() delivers all values in the correct order', () => {
+          let n = 0;
+          for (let val of testee.values()) {
+            expect(val).to.eql(testData[n][1]);
+            ++n;
+          }
+          expect(n).to.equal(testData.length);
+        });
+
+        it('is a well-formed iterable', () => {
+          const iter = testee.values();
+          expect(iter[Symbol.iterator]()).to.eql(iter);
+        });
       });
 
-      it('entries() delivers all entries in the correct order', () => {
-        let n = 0;
-        for (let val of testee.entries()) {
-          expect(val).to.eql(testData[n]);
-          ++n;
-        }
-        expect(n).to.equal(testData.length);
+      describe('entries()', () => {
+        it('delivers all entries in the correct order', () => {
+          let n = 0;
+          for (let val of testee.entries()) {
+            expect(val).to.eql(testData[n]);
+            ++n;
+          }
+          expect(n).to.equal(testData.length);
+        });
+
+        it('is a well-formed iterable', () => {
+          const iter = testee.entries();
+          expect(iter[Symbol.iterator]()).to.eql(iter);
+        });
       });
 
-      it('itself delivers all entries in the correct order', () => {
-        let n = 0;
-        for (let val of testee) {
-          expect(val).to.eql(testData[n]);
-          ++n;
-        }
-        expect(n).to.equal(testData.length);
+      describe('itself', () => {
+        it('delivers all entries in the correct order', () => {
+          let n = 0;
+          for (let val of testee) {
+            expect(val).to.eql(testData[n]);
+            ++n;
+          }
+          expect(n).to.equal(testData.length);
+        });
+
+        it('is a well-formed iterable', () => {
+          const iter = testee[Symbol.iterator]();
+          expect(iter[Symbol.iterator]()).to.eql(iter);
+        });
       });
     });
   });

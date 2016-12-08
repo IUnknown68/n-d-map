@@ -1,6 +1,6 @@
 {
   "name": "n-d-map",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Multi-dimensional Map.",
   "scripts": {
     "test": "mocha -c --compilers js:babel-core/register test/*.spec.js",
@@ -8,6 +8,10 @@
     "doc:html": "jsdoc -c doc/jsdoc.conf.json",
     "build": "npm run test && npm run doc && npm run doc:html"
   },
+  "engines" : {
+    "node" : ">=6.8.1"
+  },
+  "engineStrict" : true,
   "main": "index.js",
   "repository": {
     "type": "git",
