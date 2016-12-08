@@ -1,6 +1,6 @@
 {
   "name": "n-d-map",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Multi-dimensional Map.",
   "scripts": {
     "test": "mocha -c --compilers js:babel-core/register test/*.spec.js",
@@ -16,7 +16,7 @@
   "keywords": [
     "Map"
   ],
-  "author": "Arne Seib",
+  "author": "Arne Seib <iunknown@seiberspace.de>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/IUnknown68/n-d-map/issues"
