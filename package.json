@@ -1,6 +1,6 @@
 {
   "name": "n-d-map",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Multi-dimensional Map.",
   "scripts": {
     "test": "mocha -c --compilers js:babel-core/register test/*.spec.js",
