@@ -42,12 +42,18 @@ differences:
   and throw if this is not the case.
 
 ```javascript
-const NDMap = require('n-d-map/lib/NDMap');
+// There are transpiled and minified versions, along with the ES6-sources.
+
+// The transpiled versions are:
+const NDMap = require('n-d-map/target/NDMap');
 // or
+const NDMap = require('n-d-map/target/NDMap.min');
+// or via the index
 const NDMap = require('n-d-map').NDMap;
-// or
-import {NDMap} from 'n-d-map';
-// etc
+
+// The source files are in lib:
+const NDMap = require('n-d-map/lib/NDMap');
+
 // or equally for NDEMap
 
 // create a map with two dimensions
