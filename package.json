@@ -3,10 +3,11 @@
   "version": "1.0.3",
   "description": "Multi-dimensional Map.",
   "scripts": {
+    "compile": "node build.js",
     "test": "mocha -c --compilers js:babel-core/register test/*.spec.js",
     "doc": "jsdoc2md -f lib/*.js --module-index-format none > doc/README.md",
     "doc:html": "jsdoc -c doc/jsdoc.conf.json",
-    "build": "npm run test && npm run doc && npm run doc:html"
+    "build": "npm run test && npm run compile && npm run doc && npm run doc:html"
   },
   "engines" : {
     "node" : ">=6.8.1"

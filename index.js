@@ -1,4 +1,4 @@
 module.exports = {
-  NDMap: require('./lib/NDMap'),
-  NDEMap: require('./lib/NDEMap')
+  NDMap: require('./targets/NDMap.min'),
+  NDEMap: require('./targets/NDEMap.min')
 };

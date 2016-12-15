@@ -2,11 +2,12 @@
 
 ### About
 
-n-d-map provides two very implementations of a `Map` with multiple dimensions. Their
-interfaces follow closely the standard-`Map`.
+n-d-map provides two very implementations of a `Map` with multiple dimensions:
+`NDMap` and  `NDEMap`. Their interfaces follow closely the standard-`Map`.
 
 The difference is in methods where you have to provide a key. Instead of one key
-for a `Map`, you provide multiple keys (one per dimension) for a `NDMap`:
+for a `Map`, you provide multiple keys (one per dimension) for a `NDMap` (and
+`NDEMap` of course):
 
 ```javascript
 // map with one dimension:
@@ -37,7 +38,7 @@ differences:
 - Constructor: The constructor does **not** support (yet) an `iteratable`-argument.
   The one and only argument is the number of dimensions this instance should have.
 - Every function taking a key argument in `Map` (`delete`,`get`,`has`,`set`) takes
-  multiple key arguments in a `NDMap`. The function will check if all keys are present,
+  multiple key arguments in a `ND(E)Map`. The function will check if all keys are present,
   and throw if this is not the case.
 
 ```javascript

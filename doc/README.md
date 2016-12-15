@@ -12,7 +12,7 @@ The differences towards `NDMap` (true multidimensional Map) are:
 - The order in which items are returned by `Iterator`s is strictly the order
   in which items were inserted, regardless of the dimensions.
 
-**Author:** Arne Seib <arne28@seiberspace.de>  
+**Author:** Arne Seib <iunknown@seiberspace.de>  
 **License**: MIT - see ./LICENSE  
 **Copyright**: Arne Seib 2016  
 
@@ -169,7 +169,7 @@ The differences are:
   items were inserted in. Per level the order is preserved, but over all not.
   So whe the order matters you should use `NDEMap` instead.
 
-**Author:** Arne Seib <arne28@seiberspace.de>  
+**Author:** Arne Seib <iunknown@seiberspace.de>  
 **License**: MIT - see ./LICENSE  
 **Copyright**: Arne Seib 2016  
 
